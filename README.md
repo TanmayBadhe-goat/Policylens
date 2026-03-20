@@ -92,16 +92,9 @@ source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
 
-# Set up environment variables
-# Create .env file with:
-# OPENAI_API_KEY=your_key_here
-# SCALEDOWN_API_KEY=your_key_here (optional)
-
 # Run the server
 python -m app.main
 ```
-
-The API will be available at http://localhost:8000
 
 ### Frontend Setup
 
