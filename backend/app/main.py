@@ -9,7 +9,7 @@ This is the main entry point for the backend API. It sets up:
 I kept the main file pretty minimal - all the actual logic is in
 the routes and services modules.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from fastapi import FastAPI

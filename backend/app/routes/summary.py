@@ -4,7 +4,7 @@ Summary API routes.
 This is the main endpoint - uploads a PDF and returns the compressed summary.
 The heavy lifting is done by the pipeline_service module.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from fastapi import APIRouter, UploadFile, File

@@ -10,7 +10,7 @@ to be topically coherent. A "CHAPTER III - Data Principal Rights"
 should be summarized as one unit, not mixed with penalties from
 another chapter.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import re

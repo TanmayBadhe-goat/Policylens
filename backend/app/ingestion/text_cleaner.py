@@ -8,7 +8,7 @@ PDF extraction often leaves behind artifacts like:
 
 This module cleans that up before we start processing.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import re

@@ -5,7 +5,7 @@ This module orchestrates the entire processing flow from raw PDF bytes
 to a citizen-friendly summary. I structured it this way so each stage
 can be tested independently.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from typing import List, Dict
@@ -16,7 +16,6 @@ from app.compression.boilerplate_filter import filter_boilerplate
 from app.compression.tfidf_ranker import rank_sentences
 from app.compression.deduplicator import deduplicate_lines
 from app.compression.token_counter import count_tokens
-from app.scaledown.scaledown_client import scaledown_compress_with_mode
 from app.summarization.map_reduce import map_reduce_summarize
 from app.summarization.local_summarizer import local_extractive_summary
 
@@ -55,32 +54,22 @@ async def run_compression_pipeline(pdf_bytes: bytes) -> Dict:
     locally_compressed = rank_sentences(deduplicated, top_n=0.6)
     after_local_tokens = count_tokens(locally_compressed)
     
-    # Step 4: ScaleDown 
-    # This would be an external API for advanced compression
-    scaledown_prompt = "Compress this legislative text for citizen-friendly summarization. Preserve rights, obligations, penalties, enforcement powers, definitions, and key procedures."
-    scaledown_text, scaledown_mode, scaledown_stats = await scaledown_compress_with_mode(locally_compressed, prompt=scaledown_prompt)
-    if not (scaledown_text or "").strip():
-        scaledown_text = locally_compressed
-        scaledown_mode = "simulated"
-        scaledown_stats = {}
-    after_scaledown_tokens = count_tokens(scaledown_text)
-    
     # Step 5: Chunk and Summarize
     # Split by legal structure (PART, CHAPTER, Section)
     # Then use map-reduce to handle long documents
-    chunks = split_into_legal_chunks(scaledown_text)
+    chunks = split_into_legal_chunks(locally_compressed)
     chunk_contents = [c['content'] for c in chunks if c.get('content')]
 
     if not chunk_contents:
-        chunk_contents = [scaledown_text]
+        chunk_contents = [locally_compressed]
     
     final_summary = await map_reduce_summarize(chunk_contents)
     if not (final_summary or "").strip():
-        final_summary = local_extractive_summary(scaledown_text)
+        final_summary = local_extractive_summary(locally_compressed)
     final_summary_tokens = count_tokens(final_summary)
     
     # Calculate how much we saved
-    compression_rate = (1 - (after_scaledown_tokens / max(original_tokens, 1))) * 100
+    compression_rate = (1 - (after_local_tokens / max(original_tokens, 1))) * 100
     
     return {
         "summary": final_summary,
@@ -89,10 +78,7 @@ async def run_compression_pipeline(pdf_bytes: bytes) -> Dict:
             "original_tokens": original_tokens,
             "after_cleaning": after_cleaning_tokens,
             "after_local_compression": after_local_tokens,
-            "after_scaledown": after_scaledown_tokens,
             "final_summary_tokens": final_summary_tokens,
-            "compression_rate": f"{compression_rate:.2f}%",
-            "scaledown_mode": scaledown_mode,
-            **(scaledown_stats or {}),
+            "compression_rate": f"{compression_rate:.2f}%"
         }
     }

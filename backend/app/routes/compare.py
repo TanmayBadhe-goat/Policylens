@@ -4,7 +4,7 @@ Compare API routes.
 Compares two bills and returns the key differences.
 Useful for seeing what changed between versions of a bill.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from fastapi import APIRouter

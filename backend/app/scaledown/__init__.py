@@ -1,1 +1,0 @@
-# ScaleDown API integration module

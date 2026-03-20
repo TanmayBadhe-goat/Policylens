@@ -53,7 +53,6 @@ PolicyLens/
 │   │   ├── ingestion/           # PDF parsing, cleaning
 │   │   ├── chunking/            # Legal text chunking
 │   │   ├── compression/         # TF-IDF, dedup, boilerplate
-│   │   ├── scaledown/           # External compression API
 │   │   └── summarization/       # LLM integration
 │   └── requirements.txt
 ├── frontend/

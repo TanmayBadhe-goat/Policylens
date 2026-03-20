@@ -5,13 +5,8 @@ class BillMetric(BaseModel):
     original_tokens: int
     after_cleaning: int
     after_local_compression: int
-    after_scaledown: int
     final_summary_tokens: int
     compression_rate: str
-    scaledown_mode: str
-    scaledown_original_tokens: Optional[int] = None
-    scaledown_compressed_tokens: Optional[int] = None
-    scaledown_savings_percent: Optional[float] = None
 
 class BillBase(BaseModel):
     id: str

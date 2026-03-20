@@ -23,7 +23,7 @@ const Navbar = () => {
                 {/* User Profile */}
                 <div className="flex items-center gap-3 pl-6 border-l border-slate-300">
                     <div className="text-right hidden sm:block">
-                        <p className="text-sm font-bold text-slate-800">Vipin Kumar</p>
+                        <p className="text-sm font-bold text-slate-800">Tanmay Badhe</p>
                         <p className="text-xs text-slate-500">Student</p>
                     </div>
                     <div className="w-10 h-10 rounded border border-slate-300 bg-slate-100 flex items-center justify-center text-slate-600">

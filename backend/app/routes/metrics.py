@@ -4,7 +4,7 @@ Metrics API routes.
 Returns compression metrics for a specific bill - how many tokens
 at each stage, compression rate, etc.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from fastapi import APIRouter
@@ -20,9 +20,8 @@ async def get_metrics(bill_id: str):
     Shows the token count at each stage of the pipeline:
     - Original document
     - After cleaning
-    - After local compression
-    - After ScaleDown
-    - Final summary
+    - After Local Compression (TF-IDF)
+    - Final Summary
     
     This helps visualize how much compression happened.
     
@@ -38,11 +37,6 @@ async def get_metrics(bill_id: str):
         original_tokens=120500,
         after_cleaning=115000,
         after_local_compression=45000,
-        after_scaledown=36000,
         final_summary_tokens=850,
-        compression_rate="70.12%",
-        scaledown_mode="simulated",
-        scaledown_original_tokens=None,
-        scaledown_compressed_tokens=None,
-        scaledown_savings_percent=None,
+        compression_rate="62.66%"
     )

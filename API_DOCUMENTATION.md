@@ -49,9 +49,8 @@ curl -X POST "http://localhost:8000/api/summary" \
     "original_tokens": 118430,
     "after_cleaning": 72100,
     "after_local_compression": 34800,
-    "after_scaledown": 5200,
     "final_summary_tokens": 480,
-    "compression_rate": "99.59%"
+    "compression_rate": "70.62%"
   }
 }
 ```
@@ -71,9 +70,8 @@ Get compression metrics for a specific bill.
   "original_tokens": 120500,
   "after_cleaning": 115000,
   "after_local_compression": 45000,
-  "after_scaledown": 36000,
   "final_summary_tokens": 850,
-  "compression_rate": "70.12%"
+  "compression_rate": "62.66%"
 }
 ```
 

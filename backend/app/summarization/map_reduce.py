@@ -11,7 +11,7 @@ This is a pretty standard technique for handling long documents with
 LLMs. The challenge is making sure the final output is coherent and
 doesn't lose important details from individual sections.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from typing import List

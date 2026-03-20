@@ -6,7 +6,7 @@ This lets people try out the app without needing an OpenAI account.
 
 In production, you'd uncomment the actual API call code and add your key.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import asyncio

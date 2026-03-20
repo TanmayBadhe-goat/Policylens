@@ -6,7 +6,7 @@
  * 
  * Uses Axios instance from api.js which has the base URL configured.
  * 
- * @author Vipin Kumar
+ * @author Tanmay Badhe
  */
 
 import api from './api';

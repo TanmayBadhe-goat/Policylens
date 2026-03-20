@@ -95,7 +95,6 @@ const BillDetails = () => {
         if (displayMetrics) {
             lines.push(`Original tokens: ${displayMetrics.original_tokens}`);
             lines.push(`After local compression: ${displayMetrics.after_local_compression}`);
-            lines.push(`After scaledown: ${displayMetrics.after_scaledown}`);
             lines.push(`Compression rate: ${displayMetrics.compression_rate}`);
             lines.push('');
         }

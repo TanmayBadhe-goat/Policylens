@@ -4,7 +4,7 @@ Bills API routes.
 This module handles the /api/bills endpoints for listing available bills.
 Right now it uses mock data, but in a real app this would query a database.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from fastapi import APIRouter

@@ -10,7 +10,7 @@
  * - summaryResult: Result from the compression pipeline
  * - loading/error: UI state
  * 
- * @author Vipin Kumar
+ * @author Tanmay Badhe
  */
 
 import { create } from 'zustand';

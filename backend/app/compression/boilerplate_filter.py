@@ -11,7 +11,7 @@ I built this list by going through several bills and noting down
 phrases that appeared frequently but didn't seem to carry unique
 information. It's not exhaustive but it helps.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import re

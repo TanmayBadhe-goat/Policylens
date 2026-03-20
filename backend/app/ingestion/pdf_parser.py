@@ -5,7 +5,7 @@ I tried a few different PDF libraries (pdfplumber, PyPDF2) but PyMuPDF
 gave the best results for Indian government PDFs. The text comes out
 cleaner and it handles multi-column layouts better.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import fitz  # PyMuPDF - the import name is different from package name

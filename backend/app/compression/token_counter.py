@@ -8,7 +8,7 @@ Why count tokens? Two reasons:
 We use tiktoken because it matches how OpenAI models count tokens,
 which is what we're targeting for summarization.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 import tiktoken

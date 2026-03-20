@@ -6,7 +6,7 @@ legal documents need to be translated into what they mean for CITIZENS,
 not just summarized. So instead of "summarize this", the prompt asks
 for rights, obligations, penalties, etc.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 def build_summarization_prompt(chunk_content: str, detail_level: str = "medium") -> str:

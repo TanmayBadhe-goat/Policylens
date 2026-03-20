@@ -5,7 +5,7 @@ Legal documents often repeat the same clauses multiple times - for example,
 a definition might appear in multiple sections. This module removes
 exact duplicate lines to reduce redundancy.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 def deduplicate_lines(text: str) -> str:

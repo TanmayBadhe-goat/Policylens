@@ -141,7 +141,6 @@ class BillMetric(BaseModel):
     original_tokens: int
     after_cleaning: int
     after_local_compression: int
-    after_scaledown: int
     final_summary_tokens: int
     compression_rate: str
 ```
@@ -192,13 +191,8 @@ async def run_compression_pipeline(pdf_bytes: bytes) -> Dict:
     # Stage 3-4: Local compression
     no_boilerplate = filter_boilerplate(cleaned_text)
     deduplicated = deduplicate_lines(no_boilerplate)
-    locally_compressed = rank_sentences(deduplicated, top_n=0.6)
-    
-    # Stage 5: External compression (optional)
-    scaledown_text = await simulate_scaledown_compression(locally_compressed)
-    
-    # Stage 6: LLM summarization
-    chunks = split_into_legal_chunks(scaledown_text)
+    # Stage 5: LLM summarization
+    chunks = split_into_legal_chunks(locally_compressed)
     final_summary = await map_reduce_summarize(chunks)
     
     return {"summary": final_summary, "metrics": {...}}
@@ -246,8 +240,7 @@ Tested with Digital Personal Data Protection Bill 2023:
 |-------|-------------|-----------|
 | Original | 118,430 | - |
 | After Cleaning | 72,100 | 39% |
-| After TF-IDF | 34,800 | 52% |
-| After ScaleDown | 5,200 | 85% |
+| After TF-IDF | 34,800 | 70% |
 | Final Summary | 480 | 99.6% |
 
 ---
@@ -266,7 +259,6 @@ Tested with Digital Personal Data Protection Bill 2023:
 1. **LLM dependency**: Quality of final summary depends on LLM quality
 2. **English only**: Currently supports only English documents
 3. **No caching**: Re-processes same document each time
-4. **ScaleDown simulation**: External compression API is mocked
 
 ### 6.3 Challenges Encountered
 
@@ -333,7 +325,6 @@ npm install react react-router-dom axios zustand framer-motion lucide-react tail
 
 ```
 OPENAI_API_KEY=sk-...
-SCALEDOWN_API_KEY=sd-...
 LOG_LEVEL=INFO
 PORT=8000
 ```
@@ -356,9 +347,8 @@ PORT=8000
     "original_tokens": 118430,
     "after_cleaning": 72100,
     "after_local_compression": 34800,
-    "after_scaledown": 5200,
     "final_summary_tokens": 480,
-    "compression_rate": "99.59%"
+    "compression_rate": "70.62%"
   }
 }
 ```

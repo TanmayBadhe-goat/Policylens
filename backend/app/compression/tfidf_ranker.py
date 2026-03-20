@@ -9,7 +9,7 @@ I chose TF-IDF over something like TextRank because it's faster
 and works well for legal documents where certain terms (like
 "penalty", "compliance", "data") are actually important.
 
-Author: Vipin Kumar
+Author: Tanmay Badhe
 """
 
 from sklearn.feature_extraction.text import TfidfVectorizer
