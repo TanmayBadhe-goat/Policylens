@@ -8,22 +8,16 @@ const BillCard = ({ bill }) => {
     return (
         <Link 
             to={`/bill/${bill.id}`}
-            className="group cursor-pointer relative block"
+            className="group block"
         >
-            {/* Glow effect on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-fuchsia-500/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500"></div>
-            
-            <div className="relative bg-white/80 backdrop-blur-sm border border-violet-100/50 rounded-3xl p-6 hover:border-violet-300 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-300 hover:-translate-y-1">
-                {/* Top accent gradient bar */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-purple-500 to-fuchsia-500 rounded-t-3xl opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                
+            <div className="bg-white border-2 border-slate-200 rounded-xl p-6 hover:border-blue-400 hover:shadow-md transition-all">
                 <div className="flex items-start justify-between mb-4">
                     <div className="flex-1">
-                        <h3 className="text-lg font-display font-bold text-slate-900 group-hover:text-violet-600 transition-colors line-clamp-2 mb-2">
+                        <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 mb-2 line-clamp-2">
                             {bill.title}
                         </h3>
                         <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
-                            <FileText size={12} />
+                            <FileText size={14} />
                             <span>{bill.id}</span>
                         </div>
                     </div>
@@ -32,30 +26,30 @@ const BillCard = ({ bill }) => {
                     </Badge>
                 </div>
 
-                <div className="flex items-center gap-2 text-xs text-slate-500 mb-5">
-                    <Calendar size={12} />
-                    <span className="font-medium">{bill.date || '2024-01-15'}</span>
+                <div className="flex items-center gap-2 text-xs text-slate-600 mb-6 bg-slate-50 p-2 rounded max-w-max">
+                    <Calendar size={14} />
+                    <span className="font-bold">{bill.date || '2024-01-15'}</span>
                 </div>
 
-                <div className="mb-5">
+                <div className="mb-6">
                     <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">Compression</span>
-                        <span className="text-sm font-bold text-violet-600">{bill.compression || 82}%</span>
+                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wide">Compression</span>
+                        <span className="text-sm font-bold text-blue-600">{bill.compression || 82}%</span>
                     </div>
                     <ProgressBar 
                         value={bill.compression || 82} 
-                        color="gradient"
+                        color="blue"
                     />
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-violet-100/50">
+                <div className="flex items-center justify-between pt-4 border-t border-slate-200">
                     <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center text-white shadow-md">
-                            <FileText size={14} />
+                        <div className="w-8 h-8 rounded bg-blue-100 flex items-center justify-center text-blue-600">
+                            <FileText size={16} />
                         </div>
-                        <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">View Details</span>
+                        <span className="text-xs font-bold text-slate-600 uppercase">View Details</span>
                     </div>
-                    <div className="w-10 h-10 rounded-xl bg-violet-50 flex items-center justify-center text-violet-500 group-hover:bg-gradient-to-br group-hover:from-violet-500 group-hover:to-purple-600 group-hover:text-white transition-all duration-300 shadow-sm group-hover:shadow-lg">
+                    <div className="w-8 h-8 rounded bg-slate-100 flex items-center justify-center text-slate-600 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                         <ArrowRight size={16} />
                     </div>
                 </div>
