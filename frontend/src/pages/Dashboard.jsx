@@ -5,23 +5,38 @@ import BillCard from '../components/dashboard/BillCard';
 import { Database, Plus } from 'lucide-react';
 
 const Dashboard = () => {
-    const { bills, setBills, loading, setLoading, setSummaryResult } = useBillStore();
+    const { bills, setBills, loading, setLoading, setSummaryResult, error, setError } = useBillStore();
     const [uploading, setUploading] = useState(false);
+    const [isSlowLoading, setIsSlowLoading] = useState(false);
+
+    useEffect(() => {
+        let timeout;
+        if (loading) {
+            timeout = setTimeout(() => {
+                setIsSlowLoading(true);
+            }, 3000);
+        } else {
+            setIsSlowLoading(false);
+        }
+        return () => clearTimeout(timeout);
+    }, [loading]);
 
     useEffect(() => {
         const fetchBills = async () => {
             setLoading(true);
             try {
+                if (setError) setError(null);
                 const data = await billService.getBills();
                 setBills(data);
             } catch (err) {
                 console.error(err);
+                if (setError) setError("Failed to load bills. The server might be unreachable or timing out. Please try again.");
             } finally {
                 setLoading(false);
             }
         };
         fetchBills();
-    }, [setBills, setLoading]);
+    }, [setBills, setLoading, setError]);
 
     const handleFileUpload = async (e) => {
         const file = e.target.files[0];
@@ -59,8 +74,18 @@ const Dashboard = () => {
                 </div>
 
                 {loading ? (
-                    <div className="flex flex-col items-center justify-center py-20 bg-white border-2 border-slate-200 rounded-xl">
-                        <div className="text-slate-500 text-lg font-bold mb-4">Loading Data...</div>
+                    <div className="flex flex-col items-center justify-center py-20 bg-white border-2 border-slate-200 rounded-xl px-6 text-center">
+                        <div className="text-slate-500 text-lg font-bold mb-4">
+                            {isSlowLoading ? "Waking up the backend... This might take up to a minute on the free tier." : "Loading Data..."}
+                        </div>
+                    </div>
+                ) : error ? (
+                    <div className="flex flex-col items-center justify-center py-20 bg-white border-2 border-red-200 rounded-xl text-center px-6">
+                        <div className="text-red-600 text-xl font-bold mb-2">Connection Error</div>
+                        <p className="text-slate-600 mb-6">{error}</p>
+                        <button onClick={() => window.location.reload()} className="px-6 py-2 bg-slate-800 text-white rounded hover:bg-slate-700 font-medium transition-colors">
+                            Try Again
+                        </button>
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
