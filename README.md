@@ -8,6 +8,11 @@ PolicyLens is a web application I built to solve a problem I noticed while tryin
 
 The idea came from observing how the Digital Personal Data Protection Bill 2023 was over 100 pages long, making it nearly impossible for regular people to understand their rights. I wanted to build something that could bridge this gap.
 
+## Live Deployment
+
+- **Frontend (Web App):** [https://policylens-eta.vercel.app/](https://policylens-eta.vercel.app/)
+- **Backend (API Base URL):** [https://policylens-nvsd.onrender.com](https://policylens-nvsd.onrender.com)
+
 ## How It Works
 
 The application follows a compression-first approach:
